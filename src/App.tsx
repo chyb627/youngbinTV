@@ -1,20 +1,22 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { authTest } from './actions/auth';
+import React from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import { AppDispatch } from './store';
-import { RootState } from './store/reducer';
+import Error from './pages/Error';
+import Home from './pages/Home';
+import NotFound from './pages/NotFound';
 
 function App() {
-  const dispatch = useDispatch<AppDispatch>();
-  const { authData } = useSelector((state: RootState) => state.auth);
-  console.log('authData:', authData);
-
-  useEffect(() => {
-    dispatch(authTest());
-  }, [dispatch]);
-
-  return <div>youngbinTV</div>;
+  return (
+    <ErrorBoundary FallbackComponent={Error}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </ErrorBoundary>
+  );
 }
 
 export default App;

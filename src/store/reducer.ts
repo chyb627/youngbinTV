@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { authSlice } from '../slice/auth';
+import { movieSlice } from '../slice/movie';
 
 const rootReducer = combineReducers({
-  auth: authSlice.reducer,
+  movie: movieSlice.reducer,
 });
 
 // 타입스크립트
